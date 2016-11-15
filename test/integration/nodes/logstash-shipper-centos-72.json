@@ -1,0 +1,22 @@
+{
+  "id": "logstash-shipper-centos-72",
+  "chef_environment": "_default",
+  "automatic": {
+    "ipaddress": "192.168.33.30",
+    "platform": "centos",
+    "fqdn": "/etc/profile.d/lang.sh: line 19: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory\r\n\nlogstash-shipper.local",
+    "recipes": [
+      "elkr::default",
+      "elkr::logstash-shipper"
+    ]
+  },
+  "normal": {
+    "elasticsearch": {
+      "address": "192.168.33.33"
+    }
+  },
+  "run_list": [
+    "recipe[elkr::default]",
+    "recipe[elkr::logstash-shipper]"
+  ]
+}

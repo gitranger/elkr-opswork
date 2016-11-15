@@ -1,0 +1,19 @@
+{
+  "id": "logstash-centos-72",
+  "chef_environment": "_default",
+  "automatic": {
+    "ipaddress": "192.168.33.30",
+    "platform": "centos",
+    "fqdn": "/etc/profile.d/lang.sh: line 19: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory\r\n\nlogstash.local",
+    "recipes": [
+      "elkr::default",
+      "elkr::logstash"
+    ]
+  },
+  "normal": {
+  },
+  "run_list": [
+    "recipe[elkr::default]",
+    "recipe[elkr::logstash]"
+  ]
+}

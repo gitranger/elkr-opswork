@@ -1,0 +1,24 @@
+input {
+   redis { 
+     host => "<%= @redis_host %>" 
+     port => "<%= @redis_port %>" 
+     data_type => "list" 
+     key => "logstash" 
+     codec => json
+   }
+
+}
+
+filter{
+}
+
+output {
+   stdout {codec => json }
+   file {
+     path => "/tmp/logstash.log"
+   }
+   elasticsearch { 
+      hosts => ["<%= @elastic_host %>:<%= @elastic_port %>"] 
+   }
+}
+

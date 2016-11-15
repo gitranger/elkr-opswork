@@ -1,0 +1,123 @@
+
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-7.2
+
+suites:
+  - name: redis
+    driver:
+      synced_folders:
+      - ["shared", "/vagrant"]
+      vm_hostname: redis.local
+      network:
+      - ["forwarded_port", {guest: 6379, host: 6379}]
+      - ["private_network", {ip: "192.168.33.32"}]
+      customize:
+        memory: 512
+        cpus: 1
+    run_list:
+      - recipe[elkr::default]
+      - recipe[elkr::redis]
+    attributes:
+
+  - name: elasticsearch
+    driver:
+      synced_folders:
+      - ["shared", "/vagrant"]
+      vm_hostname: elasticsearch.local
+      network:
+      - ["forwarded_port", {guest: 9200, host: 9200}]
+      - ["private_network", {ip: "192.168.33.33"}]
+      customize:
+        memory: 3072
+        cpus: 2
+    run_list:
+      - recipe[elkr::default]
+      - recipe[elkr::elasticsearch]
+    attributes:
+      elasticsearch:
+        cluster: 
+          name: elk-cluster
+
+  - name: kibana 
+    driver:
+      synced_folders:
+      - ["shared", "/vagrant"]
+      vm_hostname: kibana.local
+      network:
+      - ["forwarded_port", {guest: 5601, host: 5601}]
+      - ["private_network", {ip: "192.168.33.34"}]
+      customize:
+        memory: 1024
+        cpus: 1
+    run_list:
+      - recipe[elkr::default]
+      - recipe[elkr::kibana]
+    attributes:
+    #  use data_bags instead
+    #  elasticsearch:
+    #    address: 192.168.33.33
+
+  - name: logstash-shipper
+    driver:
+      synced_folders:
+      - ["shared", "/vagrant"]
+      vm_hostname: logstash-shipper.local
+      network:
+      - ["forwarded_port", {guest: 5500, host: 5500}]
+      - ["private_network", {ip: "192.168.33.30"}]
+      customize:
+        memory: 1024
+        cpus: 1
+    run_list:
+      - recipe[elkr::default]
+      - recipe[elkr::logstash-shipper]
+    attributes:
+      elasticsearch:
+        address: 192.168.33.33
+
+  - name: logstash-indexer
+    driver:
+      synced_folders:
+      - ["shared", "/vagrant"]
+      vm_hostname: logstash-indexer.local
+      network:
+      - ["private_network", {ip: "192.168.33.31"}]
+      customize:
+        memory: 1024
+        cpus: 1
+    run_list:
+      - recipe[elkr::default]
+      - recipe[elkr::logstash-indexer]
+    attributes:
+      elasticsearch:
+        address: 192.168.33.33
+
+#  - name: elastic-supermarket
+#    driver:
+#      synced_folders:
+#      - ["shared", "/vagrant"]
+#      vm_hostname: e.local
+#      network:
+#      - ["forwarded_port", {guest: 9200, host: 9200}]
+#      - ["private_network", {ip: "192.168.33.40"}]
+#      customize:
+#        memory: 3072
+#        cpus: 2
+#    run_list:
+#      - recipe[elkr::default]
+#      - recipe[elkr::elastic-supermarket]
+#    attributes:
+#      elasticsearch:
+#        cluster: 
+#          name: elk-cluster
+#
+
+
+

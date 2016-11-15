@@ -1,0 +1,19 @@
+{
+  "id": "redis-centos-72",
+  "chef_environment": "_default",
+  "automatic": {
+    "ipaddress": "192.168.33.32",
+    "platform": "centos",
+    "fqdn": "/etc/profile.d/lang.sh: line 19: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory\r\n\nredis.local",
+    "recipes": [
+      "elkr::default",
+      "elkr::redis"
+    ]
+  },
+  "normal": {
+  },
+  "run_list": [
+    "recipe[elkr::default]",
+    "recipe[elkr::redis]"
+  ]
+}
