@@ -16,8 +16,8 @@ bash 'add logstash repository' do
   EOH
 end
 
-
-%w[ java-1.8.0-openjdk.x86_64 kibana ].each do |pkgs|
+include_recipe 'elkr::java'
+%w[ kibana ].each do |pkgs|
   yum_package pkgs do
      action :install
   end
