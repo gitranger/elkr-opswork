@@ -28,8 +28,9 @@ service "logstash" do
   action [ :enable ]
 end
 
-#redis=search(:nodes_info, "id:redis").first
-redis = search("aws_opsworks_instance", "hostname:redis-01").first
+role_name = "#{node[:elkr][:layer][:redis][:short_name]}"
+redis = search("aws_opsworks_instance", "role:#{role_name}").first
+
 template "/etc/logstash/conf.d/logstash.conf" do 
   source "logstash.shipper.conf.erb" 
   variables(

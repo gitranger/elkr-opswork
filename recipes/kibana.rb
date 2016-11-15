@@ -29,10 +29,9 @@ service "kibana" do
   action [ :enable ]
 end
 
-#items = search(:nodes_info, "id:elasticsearch")
-#elasticsearch=items[0]
+role_name = "#{node[:elkr][:layer][:elasticsearch][:short_name]}"
+elastic = search("aws_opsworks_instance", "role:#{role_name}").first
 
-elastic = search("aws_opsworks_instance", "hostname:elasticsearch-01").first
 Chef::Log.info("********** The instance private_ip is '#{elastic['private_ip']}' **********")
 template "/etc/kibana/kibana.yml" do 
   source "kibana.yml.erb" 

@@ -28,10 +28,12 @@ service "logstash" do
   action [ :enable ]
 end
 
-#redis=search(:nodes_info, "id:redis").first
-#elastic=search(:nodes_info, "id:elasticsearch").first
-redis = search("aws_opsworks_instance", "hostname:redis-01").first
-elastic = search("aws_opsworks_instance", "hostname:elasticsearch-01").first
+role_name = "#{node[:elkr][:layer][:redis][:short_name]}"
+redis = search("aws_opsworks_instance", "role:#{role_name}").first
+
+role_name = "#{node[:elkr][:layer][:elasticsearch][:short_name]}"
+elastic = search("aws_opsworks_instance", "role:#{role_name}").first
+
 template "/etc/logstash/conf.d/logstash.conf" do 
   source "logstash.indexer.conf.erb" 
   variables(
