@@ -1,9 +1,9 @@
 # ELKR - Elasticsearch/Logstash/Kibana/Redis 
 
-logstash shipper: Listen on 5500, accept http json payload and store on Redis instance <br>
-logstas indexer: Grab json in redis and store in elasticsearch instance <br>
-redis: is queue for  json object <br>
-elasticsearch: store all objects <br>
+logstash shipper: Listen on 8080, accept http json payload and store on Redis  <br>
+logstash indexer: Grab json object from redis, store indexes on elasticsearch <br>
+redis:  queue service for  json object <br>
+elasticsearch: search engine <br>
 kibana:  dashboard<br>
 
 
