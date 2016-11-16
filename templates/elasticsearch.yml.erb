@@ -22,6 +22,7 @@ cluster.name: <%= node[:elasticsearch][:cluster][:name] %>
 # Use a descriptive name for the node:
 #
 #node.name: node-1
+node.name: <%= @node_name %>
 #
 # Add custom attributes to the node:
 #
@@ -55,6 +56,7 @@ cluster.name: <%= node[:elasticsearch][:cluster][:name] %>
 #
 #network.host: 192.168.0.1
 network.host: 0.0.0.0
+network.publish_host: <%= @node_name %>
 #
 # Set a custom port for HTTP:
 #
@@ -69,10 +71,12 @@ network.host: 0.0.0.0
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+discovery.zen.ping.unicast.hosts: [<%= @es_cluster_hosts %>]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
 #
 #discovery.zen.minimum_master_nodes: 3
+discovery.zen.minimum_master_nodes: <%= node['elasticsearch']['discovery']['zen']['minimum_master_nodes'] %>
 #
 # For more information, see the documentation at:
 # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
@@ -95,3 +99,5 @@ network.host: 0.0.0.0
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
+# updated line
+

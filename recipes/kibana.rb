@@ -4,6 +4,7 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+include_recipe 'elkr::java'
 
 cookbook_file "/etc/yum.repos.d/logstash.repo" do 
   source "logstash.repo" 
@@ -16,7 +17,7 @@ bash 'add logstash repository' do
   EOH
 end
 
-include_recipe 'elkr::java'
+
 %w[ kibana ].each do |pkgs|
   yum_package pkgs do
      action :install
