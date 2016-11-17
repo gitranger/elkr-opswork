@@ -15,6 +15,8 @@ default['elasticsearch']['node']['name'] = 'elastic-01'
 default['elasticsearch']['node']['master'] = 'true'
 default['elasticsearch']['node']['data'] = 'true'
 default['elasticsearch']['heap'] = '2'
+dfault['elasticsearch']['shards'] = 5
+default['elasticsearch']['replicas'] = 1
 default['elasticsearch']['discovery']['zen']['minimum_master_nodes'] = 1
 #default['elasticsearch']['discovery']['zen']['ping']['unicast']['hosts'] =  [ '10.0.0.1', '10.0.0.2', '10.0.0.3' ]
 

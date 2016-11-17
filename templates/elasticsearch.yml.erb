@@ -99,5 +99,12 @@ discovery.zen.minimum_master_nodes: <%= node['elasticsearch']['discovery']['zen'
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
-# updated line
+
+index.number_of_shards: <%= node['elasticsearch']['shards'] %>
+index.number_of_replicas: <%= node['elasticsearch']['replicas'] %>
+
+
+
+
+
 
