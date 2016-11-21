@@ -28,6 +28,13 @@ service "logstash" do
   action [ :enable ]
 end
 
+%w[ /etc/logstash/keystore_pass /etc/logstash/keystore.jks ].each do |keydb|
+  keyfile = "#{keydb}".split('/').last
+  cookbook_file "#{keydb}" do 
+    source "#{keyfile}" 
+  end
+end
+
 role_name = "#{node[:elkr][:layer][:redis][:short_name]}"
 redis = search("aws_opsworks_instance", "role:#{role_name}").first
 
