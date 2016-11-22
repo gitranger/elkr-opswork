@@ -44,6 +44,7 @@ end
 
 # nginx reverse proxy
 node.default['nginx']['proxy']  = "kibana"
+node.default['nginx']['basic_auth'] = "true"
 include_recipe 'elkr::nginx'
 
 

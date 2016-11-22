@@ -49,6 +49,7 @@ end
 
 # nginx reverse proxy
 node.default['nginx']['proxy']  = "logstash"
+node.default['nginx']['basic_auth'] = "false"
 include_recipe 'elkr::nginx'
 
 
