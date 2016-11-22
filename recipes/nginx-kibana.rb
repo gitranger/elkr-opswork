@@ -35,27 +35,13 @@ end
   end
 end
 
-case node['nginx']['proxy']
-when 'kibana'
-  template "/etc/nginx/nginx.conf" do
-    source "nginx.conf.proxy.erb"
-    variables(
-      :host => "localhost",
-      :port => "5601"
-    )
-    notifies :restart, "service[nginx]", :immediately
-  end
-when 'logstash'
-  template "/etc/nginx/nginx.conf" do
-    source "nginx.conf.proxy.erb"
-    variables(
-      :host => "localhost",
-      :port => "8080"
-    )
-    notifies :restart, "service[nginx]", :immediately
-  end
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf.erb"
+  #variables(
+  #  :host => "#{node[:nginx][:server_name]}"
+  #)
+  notifies :restart, "service[nginx]", :immediately
 end
-
 
 
 

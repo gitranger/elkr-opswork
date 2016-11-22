@@ -42,8 +42,9 @@ template "/etc/kibana/kibana.yml" do
   notifies :restart, "service[kibana]", :immediately
 end
 
-# nginx
-include_recipe 'elkr::nginx'
+# nginx reverse proxy
+node.default['nginx']['proxy']  = "kibana"
+include_recipe 'elkr::nginx
 
 
 

@@ -47,3 +47,16 @@ template "/etc/logstash/conf.d/logstash.conf" do
   notifies :restart, "service[logstash]", :immediately
 end
 
+# nginx reverse proxy
+node.default['nginx']['proxy']  = "logstash"
+include_recipe 'elkr::nginx
+
+
+
+
+
+
+
+
+
+
