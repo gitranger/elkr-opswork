@@ -18,7 +18,6 @@ service "nginx" do
   action [ :enable ]
 end
 
-
 directory "/etc/nginx/ssl" do
   recursive true
 end
@@ -29,14 +28,12 @@ end
   end
 end
 
-
-Chef::Log.info("********** The instance private_ip is '#{elastic['private_ip']}' **********")
-template "/etc/kibana/kibana.yml" do
-  source "kibana.yml.erb"
-  variables(
-    :host => "#{elastic[:private_ip]}"
-  )
-  notifies :restart, "service[kibana]", :immediately
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf.erb"
+  #variables(
+  #  :host => "#{node[:nginx][:server_name]}"
+  #)
+  notifies :restart, "service[nginx]", :immediately
 end
 
 
