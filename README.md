@@ -7,6 +7,19 @@ elasticsearch: search engine <br>
 kibana:  dashboard<br>
 
 
+### How to connect to Logstash:
+- Format of data to be sent
+- url:port for staging logstash endoint
+- Sample JSON to send
+- How to visualize in Kibana (kibana url and authentication)
+- How to search directly in ElasticSearch (raills app)
+
+Load Balancers
+- Internal ELB for ElasticSearch      elk.es.omise.co
+- Internal ELB for Shipper       elk.shipper.omise.co
+
+
+
 # test
 curl -H "Content-Type: application/json" -XPUT  -d @data.json http://52.220.177.67:8080 <br>
 
