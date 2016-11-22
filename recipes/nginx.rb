@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-yum_package 'epel_release' do
+yum_package 'epel-release' do
    action :install
 end
 
