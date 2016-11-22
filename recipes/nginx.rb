@@ -8,14 +8,21 @@ yum_package 'epel-release' do
    action :install
 end
 
-yum_package 'nginx' do
-   action :install
+%w[ nginx httpd-tools ].each do |pkg|
+  yum_package pkg do
+     action :install
+  end
 end
 
 service "nginx" do
   provider Chef::Provider::Service::Systemd
   supports :status => true, :restart => true, :reload => true
   action [ :enable ]
+end
+
+cookbook_file "/etc/nginx/ssl/htpasswd" do
+  source "htpasswd"
+  action :create
 end
 
 directory "/etc/nginx/ssl" do
