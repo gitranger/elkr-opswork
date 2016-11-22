@@ -20,7 +20,7 @@ service "nginx" do
   action [ :enable ]
 end
 
-cookbook_file "/etc/nginx/ssl/htpasswd" do
+cookbook_file "/etc/nginx/htpasswd" do
   source "htpasswd"
   action :create
 end
