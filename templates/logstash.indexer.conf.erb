@@ -24,6 +24,7 @@ output {
      bucket => "logentry-bucket"
      size_file => 256
      time_file => 1
+     codec => "json"
    }
    elasticsearch { 
       hosts => ["<%= @elastic_host %>:<%= @elastic_port %>"] 
