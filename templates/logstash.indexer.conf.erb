@@ -13,9 +13,17 @@ filter{
 }
 
 output {
-   stdout {codec => json }
-   file {
-     path => "/tmp/logstash.log"
+   #stdout {codec => json }
+   #file {
+   #  path => "/tmp/logstash.log"
+   #}
+   s3 {
+     access_key_id => "AKIAJ747TSDNK2WC6FEQ"
+     secret_access_key => "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"
+     region => "ap-southeast-1"              
+     bucket => "logentry-bucket"
+     size_file => 256
+     time_file => 1
    }
    elasticsearch { 
       hosts => ["<%= @elastic_host %>:<%= @elastic_port %>"] 
